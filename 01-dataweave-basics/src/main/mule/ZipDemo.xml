@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd"></mule>
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<flow name="ZipDemoFlow" doc:id="b49b9813-affb-47bb-b7ff-bde757c08757" >
+		<ee:transform doc:name="Transform Message" doc:id="02c04a66-8ce8-4b4e-86e4-78132010ec8c" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+var countries = ["India","France","Germany","Australia","US"]
+var capitals = ["Delhi","Paris","Berlin","Canberra"]
+---
+// zip(countries, capitals)  // binds capital with its country in a small array inside an array
+//flatten(zip(countries, capitals))  // flattens array of arrays to one array
+//unzip(zip(countries, capitals))  // again unzips the arrays to two individual array
+{
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>

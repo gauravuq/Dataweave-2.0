@@ -8,7 +8,7 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 		<ee:transform doc:name="Transform Message" doc:id="526640a7-b5fe-4651-90a9-2e6fbf11b914" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
-output application/json
+output application/dw
 var numbers =["one","two",3]
 var object1 = {
 	one: 1,
@@ -20,6 +20,7 @@ var object2 = {
 }
 var objectArray= [object1, object2]
 var objectArrayWithKeys= [object1:object1, object2:object2]
+
 
 ---
 //{}  // anything inside these braces is considered to be an object
@@ -46,9 +47,12 @@ var objectArrayWithKeys= [object1:object1, object2:object2]
 //{
 //(objectArrayWithKeys),try:"fail"  // will print one big object
 //}
-
 //objectArray // simply prints the array
-objectArrayWithKeys // simply prints the object array ]]></ee:set-payload>
+//objectArrayWithKeys // simply prints the object array 
+
+ {
+ 	
+ }]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
 	</flow>
