@@ -16,3 +16,5 @@ output application/java
 ### App1: 
 * Unzip,Zip, ++,+,-,-- with Arrays and Objects
 * functions, variables , json to xml conversion using dwl files.
+* Importing custom modules and core modules ,String Module functions, function passed as a parameter, function chaining for two arguments function.
+
