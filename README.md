@@ -1,6 +1,6 @@
 # Dataweave-2.0
 
-#### Dataweave is a functional programming language which looks like JSON. This Repository had dataweave practice material.
+#### Dataweave is a functional programming language which looks like JSON. This repository has dataweave 2.0 practice materia.
 
 ```
 %dw 2.0
