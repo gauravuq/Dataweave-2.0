@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<flow name="using-selectorsFlow" doc:id="276fe137-3fa1-4802-8265-decc888a9c2b" >
+		<ee:transform doc:name="Transform Message" doc:id="62c1f9aa-46e2-4320-883f-213103bdc72d" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/dw
+
+var productsXML = readUrl("classpath://examples/products.xml", "application/xml")
+var products = productsXML.products.*product
+var myns = productsXML.products.#
+
+/* 
+// Custom function with local variables// Always better to use /dw for making transformation
+fun getProducts()=
+do{
+//var productsXML = readUrl("classpath://examples/products.xml", "application/xml")
+//var products = productsXML.products.*product // this is called multi-elector
+---
+products
+}
+---
+getProducts()  
+*/
+
+---
+//productsXML.products.#   // gives the namespace object for the products tag from an xml
+
+//products.@productId  // gives the attributes of the xml tags// this is called attribute-elector
+
+//myns#products:{products}  // applying namespace through  myns 
+
+
+//productsXML..  // this is the descendant operator; goes and select key of each object that it find and returns an array;
+ 
+ 
+products[?($.brandName=="Apple")].@  // ? is a selector to select values form an array based on some field values;]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>
