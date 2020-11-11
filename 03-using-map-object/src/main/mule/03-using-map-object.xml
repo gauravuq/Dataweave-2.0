@@ -15,7 +15,8 @@ var products =  map(payload.products.*product, (item, index)->{
 		productId: item.@productId,
 		productName: item.name,
 		productBrandName: item.brandName,
-		productPrice: item.originalPrice,
+		productPrice: item.originalPrice as Number,
+		offerValidUntil:item.offer.offerValidUntil as Date,
 		(images: {(item.images.*image map (img, index)->{img:img})})
        }
 })
@@ -26,8 +27,34 @@ var minByProducts = products minBy $.product.productPrice
 var distinctByProducts = products distinctBy $.product.productBrandName
 var filterByProducts = products filter $.product.productBrandName == "Apple"
 var filterByProductsV2 = filter(products,(item,index)-> item.product.productBrandName == "IBM")
+
+/* 
+fun convertKeysToUpper (obj)=
+if (typeOf(obj) == Object)
+mapObject(obj,(V,K,I)->{
+	(upper(K)): convertKeysToUpper(V)  // recursive solution to make keys bigger
+})
+else if (typeOf(obj) == Date)
+obj as String {format: "MMM-dd"}
+else if (typeOf(obj) == Number)
+obj as Number {format: "#,###.00"}
+else
+obj
+*/
+
+fun convertUsingMatch(obj)=
+obj match {
+   case is Object -> mapObject(obj,(V,K,I)->{
+	(upper(K)): convertUsingMatch(V)  // recursive solution to make keys bigger
+})
+  case is String -> obj as String
+else -> "We have a problem in convertUsingMatch"
+}
+
 ---
-products:{(products)}
+//products:{(products)}
+
+convertUsingMatch(product:{(products)})
 
 ]]></ee:set-payload>
 			</ee:message>
