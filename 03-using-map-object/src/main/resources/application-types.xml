@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<types:mule xmlns:types="http://www.mulesoft.org/schema/mule/types">
+  <types:catalog>
+    <types:type name="ProductsXmlRequest" format="xml">
+      <types:example format="xml" element="{http://way2learnonline.com/domain}products" location="examples/products.xml"/>
+    </types:type>
+  </types:catalog>
+  <types:enrichment select="#235003ad-a34b-4473-a6e6-ca417c2ce015">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="ProductsXmlRequest"/>
+        </types:message>
+      </types:input-event>
+    </types:processor-declaration>
+  </types:enrichment>
+</types:mule>

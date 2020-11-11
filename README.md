@@ -23,6 +23,8 @@ output application/java
 	* type myFormat = String {format:"MMM-ddd"}; usage in dataweave {date: now() as myFormat}.
 ### App2: 02-using-selectors
 * using various selectors in dw
+### App3: 03-using-map-object
+* using-map-orderby-maxby-filter functions
 
 	
 

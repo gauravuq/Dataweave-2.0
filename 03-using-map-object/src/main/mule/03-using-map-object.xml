@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<flow name="03-using-map-objectFlow" doc:id="024023a5-d4b8-4060-a2f4-d46f3d7f031d" >
+		<ee:transform doc:name="Transform Message" doc:id="235003ad-a34b-4473-a6e6-ca417c2ce015" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/dw	 	
+ns ns0 http://way2learnonline.com/domain
+var products =  map(payload.products.*product, (item, index)->{
+	product:{
+		productId: item.@productId,
+		productName: item.name,
+		productBrandName: item.brandName,
+		productPrice: item.originalPrice,
+		(images: {(item.images.*image map (img, index)->{img:img})})
+       }
+})
+
+var sortedProducts = products orderBy $.product.productPrice
+var maxByProducts = products maxBy $.product.productPrice
+var minByProducts = products minBy $.product.productPrice
+var distinctByProducts = products distinctBy $.product.productBrandName
+var filterByProducts = products filter $.product.productBrandName == "Apple"
+var filterByProductsV2 = filter(products,(item,index)-> item.product.productBrandName == "IBM")
+---
+products:{(products)}
+
+]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>
