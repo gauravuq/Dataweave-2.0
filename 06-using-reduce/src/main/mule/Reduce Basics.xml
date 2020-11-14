@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<flow name="06-using-reduceFlow" doc:id="3ee1282a-79a0-4f27-acb3-52ca4d2f7c17" >
+		<ee:transform doc:name="Transform Message" doc:id="7679b82d-5633-4623-b91c-551e985c15c6" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/dw
+
+var numbers = 1 to 4
+fun sumOfNumbers (element, accum)=  accum + element
+var nestedArray = [[1],[2,3],[4,5,6]]
+var objectArray = [{one:"1"},{two:"2",three:"3"}]
+var stringArray = ["one","two","three","four","fsadfsdf"]
+fun myReduceFunctionLogic(ele, acc=[]) = acc + ele
+// we have a match statement as well which is similar to switch case in java
+---
+// reduce (numbers, (element, accum)->accum * element) // using tail recursion with reduce function and accumulator
+// reduce (numbers, sumOfNumbers) // function passing
+// reduce (numbers,myReduceFunctionLogic) performing actions using accumulator
+// numbers reduce (ele,acc)->acc * ele  // chaining experession to use reduce function.
+// nestedArray reduce (ele,acc)->acc ++ ele  // similar to flatten function in dataweave.numbers reduce (ele,acc)->acc * ele
+// objectArray reduce (ele, acc)-> acc ++ ele // similar to evaluating a function using parenthesis {(objectArray)}
+// stringArray reduce (ele, acc)-> acc ++ ele  // string arrays just concatinate
+stringArray reduce (ele, acc=0) -> acc + (if(sizeOf(ele) > 3) 1 else 0)
+
+]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>

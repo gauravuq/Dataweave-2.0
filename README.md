@@ -25,7 +25,8 @@ output application/java
 * using various selectors in dw
 ### App3: 03-using-map-object  for Payload conversion
 * using-map, orderby, maxby, filter, mapObject, match & case 
-
+### App4: 06-using-reduce  for Payload conversion
+* reduce function for data conversion
 	
 
 ### More Coming Soon !!
