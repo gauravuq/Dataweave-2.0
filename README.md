@@ -29,5 +29,8 @@ output application/java
 * reduce function for data conversion
 ### App5 : 03-using-map-mapobject Joining datasets inside a dataweave file
 ### App6 : 05-using-try-fail-log functions inside a dataweave file
-
+### App7 : 
+* getting properties from a properties file using P() function
+* calling a flow from a data weave
+* calling a java static function from a java package.
 ### More Coming Soon !!
